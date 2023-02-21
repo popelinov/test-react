@@ -10,7 +10,6 @@ interface PersoneModalProps {
 
 const PersoneModal = ({ isModalOpen, handleModalClose, selectedPerson }: PersoneModalProps) => {
   if (!selectedPerson) {
-    handleModalClose()
     return null
   }
 
