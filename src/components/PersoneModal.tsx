@@ -8,31 +8,30 @@ interface PersoneModalProps {
   selectedPerson: Person | null
 }
 
-const PersoneModal = ({
-  isModalOpen,
-  handleModalClose,
-  selectedPerson,
-}: PersoneModalProps): JSX.Element => {
+const PersoneModal = ({ isModalOpen, handleModalClose, selectedPerson }: PersoneModalProps) => {
+  if (!selectedPerson) {
+    handleModalClose()
+    return null
+  }
+
+  const tableStructure = [
+    { title: 'Name', value: selectedPerson.name },
+    { title: 'Height', value: selectedPerson.height },
+    { title: 'Mass', value: selectedPerson.mass },
+    { title: 'Gender', value: selectedPerson.gender },
+  ]
+
   return (
     <Modal isOpen={isModalOpen} toggle={handleModalClose}>
       <ModalHeader toggle={handleModalClose}>User Info</ModalHeader>
       <ModalBody>
-        {selectedPerson && (
-          <div>
-            <p>
-              <strong>Name:</strong> {selectedPerson.name}
+        <div>
+          {tableStructure.map(({ title, value }) => (
+            <p key={title}>
+              <strong>{title}:</strong> {value}
             </p>
-            <p>
-              <strong>Height:</strong> {selectedPerson.height}
-            </p>
-            <p>
-              <strong>Mass:</strong> {selectedPerson.mass}
-            </p>
-            <p>
-              <strong>Gender:</strong> {selectedPerson.gender}
-            </p>
-          </div>
-        )}
+          ))}
+        </div>
       </ModalBody>
     </Modal>
   )
