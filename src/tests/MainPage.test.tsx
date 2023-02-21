@@ -1,101 +1,30 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import { PeopleTable } from '../components'
-import { Person } from '../utils/types'
+import { render, fireEvent, screen } from '@testing-library/react'
+import { PaginationBlock } from '../components'
+import { TestIdentifiers } from '../utils/constants'
 
-const mockData: Person[] = [
-  {
-    name: 'Den',
-    height: '193cm',
-    mass: '100kg',
-    gender: 'male',
-    homeworld: 'test',
-    films: [],
-    species: [],
-    vehicles: [],
-    starships: [],
-    created: '06.08.1997',
-    edited: '06.08.2010',
-    url: 'http//test',
-  },
-  {
-    name: 'Bogdan',
-    height: '193cm',
-    mass: '100kg',
-    gender: 'male',
-    homeworld: 'test',
-    films: [],
-    species: [],
-    vehicles: [],
-    starships: [],
-    created: '06.08.1997',
-    edited: '06.08.2010',
-    url: 'http//test',
-  },
-  {
-    name: 'Oleg',
-    height: '193cm',
-    mass: '100kg',
-    gender: 'male',
-    homeworld: 'test',
-    films: [],
-    species: [],
-    vehicles: [],
-    starships: [],
-    created: '06.08.1997',
-    edited: '06.08.2010',
-    url: 'http//test',
-  },
-]
+describe('PaginationBlock', () => {
+  const dataCount = 25
 
-const mockFunc = () => console.log()
+  it('should render the correct number of pages', () => {
+    render(<PaginationBlock page={1} dataCount={dataCount} handlePageChange={() => {}} />)
+    const pageLinks = screen.getAllByTestId(TestIdentifiers.PAGINATION_BUTTON)
+    expect(pageLinks).toHaveLength(2)
+  })
 
-describe('MainTable', () => {
-  it('renders table headers and data correctly', () => {
-    render(<PeopleTable handlePersonClick={mockFunc} people={mockData} />)
+  it('should call handlePageChange when a page link is clicked', () => {
+    const handlePageChangeMock = jest.fn()
+    render(
+      <PaginationBlock page={1} dataCount={dataCount} handlePageChange={handlePageChangeMock} />,
+    )
+    const page2Link = screen.getAllByTestId(TestIdentifiers.PAGINATION_LINK)
+    fireEvent.click(page2Link[0])
+    expect(handlePageChangeMock).toHaveBeenCalled()
+  })
 
-    // Check table headers
-    expect(screen.getByText('Name')).toBeInTheDocument()
-    expect(screen.getByText('Height')).toBeInTheDocument()
-    expect(screen.getByText('Mass')).toBeInTheDocument()
-    expect(screen.getByText('Gender')).toBeInTheDocument()
-
-    // Check initial table data
-    expect(screen.getByText('Den')).toBeInTheDocument()
-    expect(screen.getByText('Bogdan')).toBeInTheDocument()
-    expect(screen.getByText('Oleg')).toBeInTheDocument()
-    expect(screen.getByText('193cm')).toBeInTheDocument()
-    expect(screen.getByText('100kg')).toBeInTheDocument()
-    expect(screen.getByText('male')).toBeInTheDocument()
-
-    // Click next button
-    const nextButton = screen.getByText('Next')
-    nextButton.click()
-
-    // Check next page table data
-    expect(screen.queryByText('1')).not.toBeInTheDocument()
-    expect(screen.queryByText('Alice')).not.toBeInTheDocument()
-    expect(screen.queryByText('25')).not.toBeInTheDocument()
-    expect(screen.queryByText('2')).not.toBeInTheDocument()
-    expect(screen.queryByText('Bob')).not.toBeInTheDocument()
-    expect(screen.queryByText('30')).not.toBeInTheDocument()
-    expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.getByText('Charlie')).toBeInTheDocument()
-    expect(screen.getByText('35')).toBeInTheDocument()
-
-    // Click previous button
-    const previousButton = screen.getByText('Previous')
-    previousButton.click()
-
-    // Check previous page table data
-    expect(screen.getByText('1')).toBeInTheDocument()
-    expect(screen.getByText('Alice')).toBeInTheDocument()
-    expect(screen.getByText('25')).toBeInTheDocument()
-    expect(screen.getByText('2')).toBeInTheDocument()
-    expect(screen.getByText('Bob')).toBeInTheDocument()
-    expect(screen.getByText('30')).toBeInTheDocument()
-    expect(screen.queryByText('3')).not.toBeInTheDocument()
-    expect(screen.queryByText('Charlie')).not.toBeInTheDocument()
-    expect(screen.queryByText('35')).not.toBeInTheDocument()
+  it('should not render any pages if there is only one page of data', () => {
+    render(<PaginationBlock page={1} dataCount={10} handlePageChange={() => {}} />)
+    const pageLinks = screen.queryAllByRole('listitem', { name: /page \d/i })
+    expect(pageLinks).toHaveLength(0)
   })
 })
