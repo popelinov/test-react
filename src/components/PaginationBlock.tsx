@@ -14,13 +14,17 @@ const PaginationBlock = ({ page, dataCount, handlePageChange }: PaginationBlockP
       <PaginationItem disabled={page === 1}>
         <PaginationLink previous onClick={() => handlePageChange(page - 1)} />
       </PaginationItem>
-      {Array.from({ length: dataCount / 10 }, (_, i) => i + 1).map((p) => (
-        <PaginationItem key={p} active={p === page} data-testid={TestIdentifiers.PAGINATION_BUTTON}>
+      {Array.from({ length: dataCount / 10 }, (_, i) => i + 1).map((pageNumber) => (
+        <PaginationItem
+          key={pageNumber}
+          active={pageNumber === page}
+          data-testid={TestIdentifiers.PAGINATION_BUTTON}
+        >
           <PaginationLink
-            onClick={() => handlePageChange(p)}
+            onClick={() => handlePageChange(pageNumber)}
             data-testid={TestIdentifiers.PAGINATION_LINK}
           >
-            {p}
+            {pageNumber}
           </PaginationLink>
         </PaginationItem>
       ))}
