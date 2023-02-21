@@ -11,13 +11,14 @@ interface PaginationBlockProps {
 
 const PaginationBlock = ({ page, dataCount, handlePageChange }: PaginationBlockProps) => {
   const pagesCount = Math.ceil(dataCount / 10)
+  const paginationNumberArray = getPaginationNumberArray(pagesCount)
 
   return (
     <Pagination>
       <PaginationItem disabled={page === 1}>
         <PaginationLink previous onClick={() => handlePageChange(page - 1)} />
       </PaginationItem>
-      {getPaginationNumberArray(pagesCount).map((pageNumber) => (
+      {paginationNumberArray.map((pageNumber) => (
         <PaginationItem
           key={pageNumber}
           active={pageNumber === page}
