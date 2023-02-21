@@ -1,1 +1,1 @@
-export * from './peaple.type'
+export * from './people.type'
