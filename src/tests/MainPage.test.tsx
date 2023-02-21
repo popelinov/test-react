@@ -27,4 +27,10 @@ describe('PaginationBlock', () => {
     const pageLinks = screen.queryAllByRole('listitem', { name: /page \d/i })
     expect(pageLinks).toHaveLength(0)
   })
+
+  it('should disable the "next" button on the last page', () => {
+    render(<PaginationBlock page={2} dataCount={15} handlePageChange={() => {}} />)
+    const nextButton = screen.getByTestId(TestIdentifiers.NEXT_BUTTON)
+    expect(nextButton).toHaveClass('disabled')
+  })
 })
