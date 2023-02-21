@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+### Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains a simple React application that displays a list of users and allows the user to view their details. The project is built using React, React-query, and React-Bootstrap.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Displays data in chunks of 10, with pagination controls at the bottom
+- Displays the current page and disables the "previous" button when on the first page or "next" button when on the last page
+- Allows for changing the current page by clicking the pagination links
+- Written in TypeScript
 
-### `yarn start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run this project, you need to have Node.js and Git installed on your machine.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Clone this repository by running the following command:
 
-### `yarn test`
+```
+    git clone https://github.com/popelinov/test-react.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Navigate to the repository directory in your terminal:
 
-### `yarn build`
+```
+    cd test-react
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install the dependencies using yarn:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+    yarn install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start the development server:
 
-### `yarn eject`
+```
+    yarn start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The application should now be available at http://localhost:3000.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Testing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This repository includes a simple unit test for the PaginationBlock component using @testing-library/react. To run the tests, use the following command:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+yarn test
+```
