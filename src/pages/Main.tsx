@@ -1,7 +1,12 @@
 import React from 'react'
-
+import MainTable from '../layouts/MainTable'
+import { Container } from 'reactstrap'
 const Main = () => {
-  return <div>test</div>
+  return (
+    <Container>
+      <MainTable />
+    </Container>
+  )
 }
 
-export default Main
+export default React.memo(Main)
