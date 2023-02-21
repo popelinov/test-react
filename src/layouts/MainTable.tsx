@@ -5,7 +5,7 @@ import { PeopleResponse, Person } from '../utils/types'
 import { fetchPeople } from '../utils/requests'
 import { PeopleTable, PaginationBlock, PersoneModal } from '../components'
 
-const MainTable = (): JSX.Element => {
+const MainTable = () => {
   const [page, setPage] = useState<number>(1)
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)

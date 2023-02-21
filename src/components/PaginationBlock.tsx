@@ -8,11 +8,7 @@ interface PaginationBlockProps {
   handlePageChange: (page: number) => void
 }
 
-const PaginationBlock = ({
-  page,
-  dataCount,
-  handlePageChange,
-}: PaginationBlockProps): JSX.Element => {
+const PaginationBlock = ({ page, dataCount, handlePageChange }: PaginationBlockProps) => {
   return (
     <Pagination>
       <PaginationItem disabled={page === 1}>

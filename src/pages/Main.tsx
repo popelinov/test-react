@@ -1,6 +1,7 @@
 import React from 'react'
-import MainTable from '../layouts/MainTable'
+import { MainTable } from '../layouts'
 import { Container } from 'reactstrap'
+
 const Main = () => {
   return (
     <Container>
