@@ -9,7 +9,7 @@ describe('PaginationBlock', () => {
   it('should render the correct number of pages', () => {
     render(<PaginationBlock page={1} dataCount={dataCount} handlePageChange={() => {}} />)
     const pageLinks = screen.getAllByTestId(TestIdentifiers.PAGINATION_BUTTON)
-    expect(pageLinks).toHaveLength(2)
+    expect(pageLinks).toHaveLength(3)
   })
 
   it('should call handlePageChange when a page link is clicked', () => {

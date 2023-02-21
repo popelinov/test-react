@@ -1,6 +1,7 @@
 import React from 'react'
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 import { TestIdentifiers } from '../utils/constants'
+import { getPaginationNumberArray } from '../utils/helpers'
 
 interface PaginationBlockProps {
   page: number
@@ -9,12 +10,14 @@ interface PaginationBlockProps {
 }
 
 const PaginationBlock = ({ page, dataCount, handlePageChange }: PaginationBlockProps) => {
+  const pagesCount = Math.ceil(dataCount / 10)
+
   return (
     <Pagination>
       <PaginationItem disabled={page === 1}>
         <PaginationLink previous onClick={() => handlePageChange(page - 1)} />
       </PaginationItem>
-      {Array.from({ length: dataCount / 10 }, (_, i) => i + 1).map((pageNumber) => (
+      {getPaginationNumberArray(pagesCount).map((pageNumber) => (
         <PaginationItem
           key={pageNumber}
           active={pageNumber === page}
@@ -28,7 +31,7 @@ const PaginationBlock = ({ page, dataCount, handlePageChange }: PaginationBlockP
           </PaginationLink>
         </PaginationItem>
       ))}
-      <PaginationItem data-testid={TestIdentifiers.NEXT_BUTTON} disabled={page === dataCount / 10}>
+      <PaginationItem data-testid={TestIdentifiers.NEXT_BUTTON} disabled={page === pagesCount}>
         <PaginationLink next onClick={() => handlePageChange(page + 1)} />
       </PaginationItem>
     </Pagination>
